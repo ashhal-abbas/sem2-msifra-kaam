@@ -1,11 +1,54 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Math Quiz</title>
 </head>
 <body>
-    ASDASDADSAAAAAAAAAAAAAA FUUCADCASCASCASDaaaaaaa
+  <h2>Math Quiz</h2>
+  <p id="Question"></p>
+  <input type="number" id="Answer">
+  <button onclick="CheckAnswer()">Submit</button>
+  <p id="Feedback"></p>
+  <p id="Score">Score: 0</p>
+
+  <script>
+    let num1, num2, correctanswer;
+    let score = 0;
+
+    function generateQuestion() {
+      operatorsArray = ['+','-']
+      const randomOperator = operatorsArray[Math.floor(Math.random()*(operatorsArray.length))];
+      console.log(operatorsArray.length);
+      num1 = Math.floor(Math.random() * 10) + 1;
+      num2 = Math.floor(Math.random() * 10) + 1;
+        
+      if (randomOperator === '+') {
+                 correctAnswer = num1 + num2;
+        } else{
+            correctAnswer = num1 - num2;
+        }
+
+      document.getElementById("Question").textContent = `What is ${num1} ${randomOperator} ${num2}?`;
+    }
+
+    function CheckAnswer() {
+      let userAnswer = parseInt(document.getElementById("Answer").value);
+      if (userAnswer === correctAnswer) {
+        score++;
+        document.getElementById("Feedback").textContent = "Correct ✅";
+      } else {
+        document.getElementById("Feedback").textContent = "Incorrect ❌";
+        score--;
+      }
+      document.getElementById("Score").textContent = `Score: ${score}`;
+      document.getElementById("Answer").value = "";
+      generateQuestion();
+    }
+
+    generateQuestion();
+  </script>
 </body>
 </html>
